@@ -1,0 +1,195 @@
+.layout {
+  min-height: 100vh;
+  height: 100%;
+  width: 100%;
+  //max-width: calc(1110px + 64px + 64px);
+  overflow: hidden;
+  position: relative;
+  margin: 0 auto;
+  //padding: 0 64px;
+
+  header {
+    position: relative;
+    width: 100%;
+    max-width: calc(1110px + 64px + 64px);
+    margin: 0 auto;
+    padding: 0 64px;
+    height: 58px;
+    left: 0;
+    top: 0;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    margin-top: 32px;
+  }
+
+  .content-container {
+    width: 100%;
+    height: 100%;
+    min-height: calc(100vh - 58px - 56px);
+    padding-bottom: 48px;
+  }
+
+  footer {
+    width: 100%;
+    max-width: calc(1110px + 64px + 64px);
+    margin: 0 auto;
+    padding: 0 64px;
+    height: 56px;
+    .footer-wrapper {
+      width: 100%;
+      max-width: 1110px;
+      height: 56px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid #bfc4c9;
+    }
+  }
+}
+
+.layout {
+  header {
+    .header_logo {
+      width: 165px;
+      height: 40px;
+      margin: 0px 120px 0 0;
+    }
+    .menu-icon {
+      display: none;
+    }
+
+    .header_aside {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      h3 {
+        font-weight: 700;
+        font-size: 32px;
+        line-height: 40px;
+      }
+      .header_user {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        span {
+          font-weight: 600;
+          font-size: 14px;
+          margin-right: 16px;
+        }
+        .header_user-avatar {
+          width: 58px;
+          height: 58px;
+          //border-radius: 150px;
+          //filter: drop-shadow(0px 2px 4px rgba(191, 196, 201, 0.2)) drop-shadow(0px 3px 4px rgba(191, 196, 201, 0.18)) drop-shadow(0px 1px 5px rgba(191, 196, 201, 0.24));
+        }
+      }
+    }
+  }
+}
+
+.layout {
+  footer {
+    .footer-wrapper {
+      .footer-icons {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .layout {
+    //max-width: calc(640px + 64px + 64px);
+
+    header {
+      max-width: calc(640px + 64px + 64px);
+      height: 40px;
+      .header_logo {
+        display: none;
+      }
+      .menu-icon {
+        display: block;
+        margin-right: 24px;
+      }
+
+      .header_aside {
+        justify-content: flex-start;
+        .header_user {
+          display: none;
+        }
+      }
+    }
+    footer {
+      max-width: calc(640px + 64px + 64px);
+      .footer-wrapper {
+        max-width: 640px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .layout {
+    //max-width: calc(288px + 16px + 16px);
+    //padding: 0 16px;
+    header {
+      max-width: calc(288px + 16px + 16px);
+      padding: 0 16px;
+      margin-top: 24px;
+      height: 28px;
+      .menu-icon {
+        width: 24px;
+        height: 24px;
+      }
+      .header_aside {
+        h3 {
+          font-weight: 700;
+          font-size: 18px;
+          line-height: 28px;
+        }
+      }
+    }
+
+    footer {
+      max-width: calc(288px + 16px + 16px);
+      padding: 0 16px;
+      height: 104px;
+      .footer-wrapper {
+        max-width: 288px;
+        height: 104px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        span {
+          text-align: center;
+          font-weight: 400;
+          font-size: 15px;
+          line-height: 20px;
+          width: 200px;
+        }
+        .footer-icons {
+          display: flex;
+          gap: 16px;
+          align-items: center;
+          margin-top: 16px;
+        }
+      }
+    }
+  }
+}
+
+/* // Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) { ... }
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) { ... }
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) { ... }
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) { ... } */
