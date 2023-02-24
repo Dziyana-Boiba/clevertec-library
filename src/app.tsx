@@ -1,17 +1,35 @@
-import React from 'react';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { HashRouter, Navigate, Route, Routes } from 'react-router-dom';
-import { MenuContextProvider } from './store/menu-context';
+
 import { Layout } from './common/layout/layout';
 import { SidebarLayout } from './common/sidebar-layout/sidebar-layout';
 import { BookPage } from './pages/book';
 import { MainPage } from './pages/main';
 import { Contract } from './pages/terms/contract';
 import { Terms } from './pages/terms/terms';
+import { LOAD_CATEGORIES } from './redux/reducers/categories/actions';
+import { AppDispatch } from './redux';
 
 import './index.css';
 
-export const App = () => (
-  <MenuContextProvider>
+export const App = () => {
+  const dispatch: AppDispatch = useDispatch();
+
+  useEffect(() => {
+    let ignore = false;
+
+    if (!ignore) {
+      dispatch({ type: LOAD_CATEGORIES });
+      console.log('dispatch load categories');
+    }
+
+    return () => {
+      ignore = true;
+    };
+  }, [dispatch]);
+
+  return (
     <HashRouter>
       <Routes>
         <Route path='/' element={<Layout />}>
@@ -26,5 +44,5 @@ export const App = () => (
         </Route>
       </Routes>
     </HashRouter>
-  </MenuContextProvider>
-);
+  );
+};
