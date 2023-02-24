@@ -7,7 +7,7 @@ export const categoriesData = [
   },
   {
     id: '2',
-    category: 'detectives',
+    category: 'detective',
     name: 'Детективы',
     amount: 8,
   },
@@ -49,7 +49,7 @@ export const categoriesData = [
   },
   {
     id: '9',
-    category: 'art',
+    category: 'culture',
     name: 'Культура и искусство',
     amount: 5,
   },
@@ -61,7 +61,7 @@ export const categoriesData = [
   },
   {
     id: '11',
-    category: 'journalistic',
+    category: 'publicistic',
     name: 'Публицистическая литература',
     amount: 0,
   },

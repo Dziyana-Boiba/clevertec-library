@@ -1,6 +1,6 @@
-import './rating-bar.scss';
 import { ReactComponent as StarIcon } from '../../../assets/images/Icon_star.svg';
 import { ReactComponent as StarEmptyIcon } from '../../../assets/images/Icon_star-empty.svg';
+import './rating-bar.scss';
 
 type Props = {
   rating: number;

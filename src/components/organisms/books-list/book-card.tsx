@@ -1,11 +1,8 @@
-import { useState } from 'react';
-import './book-card.scss';
-import bookImage from '../../../assets/images/book-image.png';
-import { ReactComponent as StarIcon } from '../../../assets/images/Icon_star.svg';
-import { ReactComponent as StarEmptyIcon } from '../../../assets/images/Icon_star-empty.svg';
-import { ReactComponent as CatIcon } from '../../../assets/images/Icon_Cat.svg';
 import { RatingBar } from '../../molecules/rating/rating-bar';
 import { Button } from '../../molecules/button/button';
+import { ReactComponent as CatIcon } from '../../../assets/images/Icon_Cat.svg';
+import bookImage from '../../../assets/images/book-image.png';
+import './book-card.scss';
 
 type Props = {
   book: any;
@@ -32,7 +29,7 @@ export const BookCard = ({ book, isListView, onClick }: Props) => {
       data-test-id='card'
     >
       <div className='card-container_book-image'>
-        {book.image === '' ? <CatIcon /> : <img src={bookImage} alt='Title page of the book' />}
+        {book.image.length > 0 ? <img src={bookImage} alt='Title page of the book' /> : <CatIcon />}
       </div>
       <div className='card-container_content'>
         {!isListView && <RatingBar rating={book.rating} />}

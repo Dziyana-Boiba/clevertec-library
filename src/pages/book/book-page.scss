@@ -8,8 +8,6 @@
       max-width: calc(1110px + 64px + 64px);
       width: 100%;
       margin: 0 auto;
-      //display: flex;
-      //align-items: center;
       padding: 20px 64px;
       font-weight: 400;
       font-size: 14px;
@@ -31,18 +29,8 @@
       .book-image {
         min-width: 445px;
         width: 100%;
-        height: 594px;
+        height: calc(696px + 8px + 6px + 4px);
         overflow: hidden;
-        background: #f9f9fa;
-        border: 1px solid #a7a7a7;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 10px;
-        img {
-          width: 100%;
-          height: 100%;
-        }
       }
       .book-description {
         display: flex;
@@ -119,28 +107,11 @@
           display: table;
           max-width: 635px;
           width: 100%;
-          //vertical-align: top;
-          //max-width: 1110px;
-          //width: 100%;
-          //height: 244px;
-          //-moz-column-count: 2;
-          //-webkit-column-count: 2;
-          //column-count: 2;
-          //-webkit-column-break-inside: avoid;
-          //page-break-inside: avoid;
-          //break-inside: avoid;
-          //page-break-after: avoid;
-          //column-gap: normal;
-
           tr {
             margin-bottom: 16px;
             text-align: start;
             display: flex;
             gap: 70px;
-            //-webkit-column-break-inside: avoid;
-            //page-break-inside: avoid;
-            //break-inside: avoid;
-            //page-break-after: avoid;
             th {
               font-weight: 600;
               font-size: 16px;
@@ -161,7 +132,11 @@
     .reviews-container {
       max-width: 730px;
       width: 100%;
+
       p {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
         span {
           font-weight: 400;
           font-size: 14px;
@@ -169,32 +144,52 @@
           color: #a7a7a7;
           margin-left: 6px;
         }
-      }
-      .review-block {
-        margin-bottom: 42px;
-        .user-info {
-          display: flex;
-          align-items: center;
-          gap: 24px;
-          margin-bottom: 16px;
-          img {
-            width: 32px;
-            height: 32px;
+        .review-toggle-icon {
+          margin-left: 24px;
+          transform: rotate(0deg);
+          transition: all 0.3s ease-in-out;
+          cursor: pointer;
+          &.open {
+            transform: rotate(180deg);
+            transition: all 0.3s ease-in-out;
           }
-          .user-name {
-            display: flex;
-            align-items: center;
-            gap: 24px;
+          path {
+            fill: black;
           }
         }
-        .review-rating {
-          display: flex;
-          gap: 12px;
-        }
-        .review-text {
-          margin-top: 16px;
+      }
+      .reviews-wrapper {
+        display: none;
+        &.open {
+          display: block;
+          .review-block {
+            margin-bottom: 42px;
+            .user-info {
+              display: flex;
+              align-items: center;
+              gap: 24px;
+              margin-bottom: 16px;
+              img {
+                width: 32px;
+                height: 32px;
+              }
+              .user-name {
+                display: flex;
+                align-items: center;
+                gap: 24px;
+              }
+            }
+            .review-rating {
+              display: flex;
+              gap: 12px;
+            }
+            .review-text {
+              margin-top: 16px;
+            }
+          }
         }
       }
+
       button {
         width: 350px;
         height: 52px !important;
@@ -213,6 +208,11 @@
       max-width: 350px;
       width: 100%;
       margin-bottom: 16px;
+      &.closed {
+        border-bottom: none;
+        margin-bottom: 0px;
+        padding-bottom: 0px;
+      }
     }
   }
 }
@@ -228,7 +228,7 @@
         .book-image {
           min-width: 136px;
           width: 136px;
-          height: 198px;
+          height: 238px;
         }
         .book-description {
           display: flex;
@@ -327,7 +327,7 @@
         .book-image {
           min-width: 188px;
           width: 188px;
-          height: 260px;
+          height: 300px;
           margin: 0 auto;
         }
         .book-description {
@@ -394,6 +394,7 @@
         }
         button {
           width: 100%;
+          margin-top: 20px;
         }
       }
       .book-page_block-title {

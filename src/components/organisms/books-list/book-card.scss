@@ -1,7 +1,6 @@
 .card-container-list {
   width: 100%;
   max-width: 825px;
-  //height: 218px;
   background: #ffffff;
   box-shadow: 0px 2px 4px rgba(191, 196, 201, 0.2), 0px 3px 4px rgba(191, 196, 201, 0.18),
     0px 1px 5px rgba(191, 196, 201, 0.24);
@@ -95,7 +94,6 @@
     .card-footer {
       width: 100%;
       display: flex;
-      justify-content: center;
       align-items: center;
     }
   }
@@ -132,7 +130,6 @@
   .card-container-list {
     width: 100%;
     max-width: 825px;
-    //height: 146px;
     padding: 16px 16px 16px 8px;
     .card-container_book-image {
       min-width: 70px;
@@ -143,6 +140,7 @@
     .card-footer {
       flex-direction: column;
       justify-content: center;
+      align-items: flex-start !important;
       gap: 16;
       margin-top: 3px;
       button {
