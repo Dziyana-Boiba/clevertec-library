@@ -1,0 +1,136 @@
+.book-description-container {
+  display: flex;
+  margin-bottom: 42px;
+  .book-image {
+    min-width: 445px;
+    width: 100%;
+    height: calc(696px + 8px + 6px + 4px);
+    overflow: hidden;
+  }
+  .book-description {
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+    .book-title {
+      font-weight: 700;
+      font-size: 32px;
+      line-height: 40px;
+      color: #363636;
+      margin-bottom: 24px;
+    }
+    .book-author {
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 28px;
+      color: #a7a7a7;
+      margin-bottom: 32px;
+    }
+    button {
+      width: 350px;
+      height: 52px !important;
+      border-radius: 30px !important;
+      font-weight: 600;
+      font-size: 16px !important;
+    }
+    .about {
+      margin-top: 62px;
+      p {
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 28px;
+        color: #363636;
+        border-bottom: 1px solid #ebebeb;
+        padding-bottom: 16px;
+        max-width: 350px;
+        width: 100%;
+        margin-bottom: 32px;
+      }
+      div {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+      }
+    }
+  }
+}
+.about-mobile-version {
+  display: none;
+}
+
+@media screen and (max-width: 980px) {
+  .book-description-container {
+    margin-bottom: 48px;
+    .book-image {
+      min-width: 136px;
+      width: 136px;
+      height: 238px;
+    }
+    .book-description {
+      display: flex;
+      flex-direction: column;
+      margin-left: 32px;
+      .book-title {
+        font-size: 24px;
+        line-height: 30px;
+        margin-bottom: 32px;
+      }
+      .book-author {
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 18px;
+      }
+      button {
+        width: 306px;
+      }
+      .about {
+        display: none;
+      }
+    }
+  }
+  .about-mobile-version {
+    display: block;
+    margin-bottom: 52px;
+    div {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 24px;
+    }
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .book-description-container {
+    flex-direction: column;
+    margin-bottom: 42px;
+    .book-image {
+      min-width: 188px;
+      width: 188px;
+      height: 300px;
+      margin: 0 auto;
+    }
+    .book-description {
+      display: flex;
+      flex-direction: column;
+      margin: 16px 0 0 0;
+      .book-title {
+        font-size: 18px;
+        line-height: 28px;
+        margin-bottom: 8px;
+      }
+      .book-author {
+        font-weight: 400;
+        font-size: 12px;
+      }
+      button {
+        width: 100%;
+      }
+    }
+  }
+  .about-mobile-version {
+    margin-bottom: 42px;
+    div {
+      font-size: 12px;
+      line-height: 18px;
+    }
+  }
+}

@@ -1,0 +1,34 @@
+.auth-container {
+  .auth-respond-block {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    padding: 48px 32px;
+    width: 600px;
+    background: #ffffff;
+    border-radius: 16px;
+    .auth-respond-block_header {
+      h4 {
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 30px;
+      }
+    }
+    p {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 24px;
+      display: flex;
+      align-items: center;
+      text-align: center;
+    }
+    .common-button {
+      font-size: 16px;
+      font-weight: 600;
+      height: 52px;
+      border-radius: 30px;
+    }
+  }
+}

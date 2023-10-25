@@ -1,5 +1,4 @@
-.term-container,
-.contract-container {
+.term-container {
   h3 {
     font-weight: 700;
     font-size: 32px;
@@ -27,8 +26,7 @@
 }
 
 @media screen and (max-width: 620) {
-  .term-container,
-  .contract-container {
+  .term-container {
     h3 {
       font-size: 18px;
       line-height: 28px;

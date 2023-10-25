@@ -1,0 +1,42 @@
+.book-page_breadcrumbs {
+  width: 100%;
+  background: #f9f9fa;
+  margin-bottom: 42px;
+  &_link {
+    max-width: calc(1110px + 64px + 64px);
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px 64px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    color: #a7a7a7;
+    .slash {
+      margin: 0 4px -8px 4px;
+    }
+  }
+}
+
+@media screen and (max-width: 980px) {
+  .book-page_breadcrumbs {
+    margin-bottom: 48px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .book-page_breadcrumbs {
+    &_link {
+      max-width: calc(640px + 64px + 64px);
+    }
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .book-page_breadcrumbs {
+    &_link {
+      margin-bottom: 20px;
+      max-width: calc(288px + 16px + 16px);
+      padding: 20px 16px;
+    }
+  }
+}

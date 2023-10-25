@@ -1,19 +1,23 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { ErrorToast } from '../../common/error-toast/error-toast';
-import { Loader } from '../../common/loader/loader';
-import { SelectBar } from '../../components/molecules/select-bar/select-bar';
-import { BooksList } from '../../components/organisms/books-list/books-list';
-import { AppDispatch, RootState } from '../../redux';
-import { LOAD_BOOKS_LIST } from '../../redux/reducers/books-list/actions';
+import { BooksList } from '../../components/books-list/books-list';
+import { SelectBar } from '../../components/common/select-bar/select-bar';
+import { ErrorToast } from '../../global/error-toast/error-toast';
+import { Loader } from '../../global/loader/loader';
+import { booksSelector } from '../../redux/books/selector';
+import { getBooksRequest } from '../../redux/books/slice';
+import { categoriesSelector } from '../../redux/categories/selector';
+import { getCategoriesRequest } from '../../redux/categories/slice';
+import { AppDispatch } from '../../redux/store';
 
 export const MainPage = () => {
   const [isListView, setIsListView] = useState<boolean>(false);
 
   const dispatch: AppDispatch = useDispatch();
-  const booksList = useSelector((state: RootState) => state.books);
-  const categories = useSelector((state: RootState) => state.categories);
+
+  const { loading: booksLoading, error: booksError } = useSelector(booksSelector);
+  const { data: categories, loading: categoriesLoading, error: categoriesError } = useSelector(categoriesSelector);
 
   const selectViewHandler = (viewType: string) => {
     if (viewType === 'list') {
@@ -24,14 +28,20 @@ export const MainPage = () => {
   };
 
   useEffect(() => {
-    dispatch({ type: LOAD_BOOKS_LIST });
+    if (!categories) {
+      dispatch(getCategoriesRequest());
+    }
+  }, [dispatch, categories]);
+
+  useEffect(() => {
+    dispatch(getBooksRequest());
   }, [dispatch]);
 
-  if (booksList.loading || categories.loading) {
+  if (booksLoading || categoriesLoading) {
     return <Loader />;
   }
 
-  if (booksList.error || categories.error) {
+  if (booksError || categoriesError) {
     return <ErrorToast />;
   }
 

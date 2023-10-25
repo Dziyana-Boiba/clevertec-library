@@ -1,0 +1,27 @@
+.book-rating-container {
+  margin-bottom: 62px;
+  .rating {
+    display: flex;
+    align-items: center;
+    margin-top: 16px;
+    gap: 12px;
+    span {
+      margin-left: 12px;
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 28px;
+    }
+  }
+}
+
+@media screen and (max-width: 980px) {
+  .book-rating-container {
+    margin-bottom: 52px;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .book-rating-container {
+    margin-bottom: 42px;
+  }
+}
