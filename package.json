@@ -1,6 +1,7 @@
 {
   "name": "library.cleverland",
   "version": "0.1.0",
+  "homepage": "https://dziyana-boiba.github.io/clevertec-library/",
   "private": true,
   "scripts": {
     "predeploy": "npm run build",

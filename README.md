@@ -2,7 +2,7 @@
 
 [Live Demo](https://dziyana-boiba.github.io/clevertec-library/)
 
-**Login:** Dianatest1
+**Login:** Dianatest1 </br>
 **Password:** Asdfghj1
 
 Please do not edit the login and password.
@@ -23,6 +23,7 @@ Please do not edit the login and password.
 - **Book Booking:** Users will soon be able to reserve books from the library.
 - **User Reviews and Ratings:** The ability to add reviews and ratings for books.
 - **User Profiles:** Users will have customizable profiles where they can manage their data.
+- **Language Selection:** Choose your preferred language for the website interface.
 
 ## Credits
 
