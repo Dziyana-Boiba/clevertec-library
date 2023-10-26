@@ -1,5 +1,7 @@
 import { BookDetailsType } from '../../types/books';
 
+import './book-detailed-info.scss';
+
 type Props = {
   bookDetails: BookDetailsType | null;
 };

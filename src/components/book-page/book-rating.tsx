@@ -1,5 +1,7 @@
 import { RatingBar } from '../common/rating/rating-bar';
 
+import './book-rating.scss';
+
 type Props = {
   rating: number | null;
 };

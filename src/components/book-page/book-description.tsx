@@ -1,9 +1,11 @@
 import React from 'react';
 
-import { BookSwiper } from '../book-swiper/book-swiper';
-import { Button } from '../common/button/button';
 import { BookDetailsType } from '../../types/books';
 import { bookingMessage } from '../../utils/booking';
+import { BookSwiper } from '../book-swiper/book-swiper';
+import { Button } from '../common/button/button';
+
+import './book-description.scss';
 
 type Props = {
   bookDetails: BookDetailsType | null;

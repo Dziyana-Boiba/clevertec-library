@@ -7,6 +7,8 @@ import { formatDate } from '../../utils/format-date';
 import { Button } from '../common/button/button';
 import { RatingBar } from '../common/rating/rating-bar';
 
+import './book-reviews.scss';
+
 type Props = {
   bookDetails: BookDetailsType | null;
 };

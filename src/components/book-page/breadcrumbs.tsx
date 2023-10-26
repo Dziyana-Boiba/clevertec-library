@@ -5,6 +5,8 @@ import { ReactComponent as SlashIcon } from '../../assets/images/Icon_Slash.svg'
 import { bookDetailsSelector } from '../../redux/book-details/selector';
 import { categoriesSelector } from '../../redux/categories/selector';
 
+import './breadcrumbs.scss';
+
 export const Breadcrumbs = () => {
   const { category } = useParams();
 
