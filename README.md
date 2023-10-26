@@ -2,7 +2,7 @@
 
 [Live Demo](https://dziyana-boiba.github.io/clevertec-library/)
 
-**Login:** Dianatest1 </br>
+**Login:** dianatest1 </br>
 **Password:** Asdfghj1
 
 Please do not edit the login and password.
