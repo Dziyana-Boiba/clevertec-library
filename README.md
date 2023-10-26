@@ -2,9 +2,14 @@
 
 [Live Demo](https://)
 
+**Login:** Dianatest1
+**Password:** Asdfghj1
+
+Please do not edit the login and password.
+
 ## Tech Stack
 
-**React, TypeScript, Redux-Saga, SCSS, React Hook Form **
+**React, TypeScript, Redux-Saga, SCSS, Axios, React Hook Form**
 
 ## Features
 
@@ -21,4 +26,4 @@
 
 ## Credits
 
-[Clevertec](https://clevertec.ru/ 'Clevertec') (Provided Api data, design)
+[Clevertec](https://clevertec.ru/ 'Clevertec') (Provided the server, books data and design)
