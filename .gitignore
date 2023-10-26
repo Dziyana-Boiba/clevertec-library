@@ -12,6 +12,8 @@ node_modules
 # cypress
 /cypress/report
 
+# production
+/build
 
 # misc
 .DS_Store
