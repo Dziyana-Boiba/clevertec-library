@@ -1,0 +1,35 @@
+{
+  "files": {
+    "main.css": "/clevertec-library/static/css/main.904ef815.css",
+    "main.js": "/clevertec-library/static/js/main.8b853daf.js",
+    "static/media/Icon_Instagram.svg": "/clevertec-library/static/media/Icon_Instagram.bf0e437e0ca1c90fb3f7c8961e5e6541.svg",
+    "static/media/Icon_table.svg": "/clevertec-library/static/media/Icon_table.53261a87b9d30418b975b1e5a0e82c03.svg",
+    "static/media/Icon_Close.svg": "/clevertec-library/static/media/Icon_Close.25a40007fe64a26f06788356fc0b3bf7.svg",
+    "static/media/Icon_VK.svg": "/clevertec-library/static/media/Icon_VK.cec79a7ecdbc915aed26c5a4ab1ff5c2.svg",
+    "static/media/Icon_rating.svg": "/clevertec-library/static/media/Icon_rating.2b5735f33e6f5fe12612e09a1a27a128.svg",
+    "static/media/Icon_Cat.svg": "/clevertec-library/static/media/Icon_Cat.02fa9fbf140a9a7bd8c7426764ff76f2.svg",
+    "static/media/Icon_Menu.svg": "/clevertec-library/static/media/Icon_Menu.a14f07928550c21307588720eff64bd7.svg",
+    "static/media/Icon_List.svg": "/clevertec-library/static/media/Icon_List.88fdd5465e4273bf3bb909e06c24ace6.svg",
+    "static/media/Icon_Search.svg": "/clevertec-library/static/media/Icon_Search.9ac2de41ffa0689b64a6f74726a6b053.svg",
+    "static/media/Icon_Eye_closed.svg": "/clevertec-library/static/media/Icon_Eye_closed.2f730c0ac8c855d7e8b48f4fe80850b7.svg",
+    "static/media/Icon_star.svg": "/clevertec-library/static/media/Icon_star.94ead8fd6a97d792fa750c25787ead1f.svg",
+    "static/media/Icon_Chevron_Down.svg": "/clevertec-library/static/media/Icon_Chevron_Down.4a9984d9692cd860fdf45e8d39db4e06.svg",
+    "static/media/Icon_Close_black.svg": "/clevertec-library/static/media/Icon_Close_black.8575e7decb66b89d658dfc5f7e41c08b.svg",
+    "static/media/Icon_Error.svg": "/clevertec-library/static/media/Icon_Error.1e47606c0398336519aae16aeab1b007.svg",
+    "index.html": "/clevertec-library/index.html",
+    "static/media/Icon_Eye_Open.svg": "/clevertec-library/static/media/Icon_Eye_Open.6648ff5dec351ea5e1476a4e302df1af.svg",
+    "static/media/Icon_linkedin.svg": "/clevertec-library/static/media/Icon_linkedin.7e716a127ab3f8577a17f83bfefdacc9.svg",
+    "static/media/Icon_star-empty.svg": "/clevertec-library/static/media/Icon_star-empty.adb8da0b722c061eb8ce777c66317dfc.svg",
+    "static/media/Icon_Facebook.svg": "/clevertec-library/static/media/Icon_Facebook.106e7fb630d241320112014b9985342c.svg",
+    "static/media/Icon_Chevron_Right.svg": "/clevertec-library/static/media/Icon_Chevron_Right.18d365a4fe1bc021e1df71aaeddc865c.svg",
+    "static/media/Icon_Chevron_Left.svg": "/clevertec-library/static/media/Icon_Chevron_Left.bbd653a6312d42a682d19a13f5b226ff.svg",
+    "static/media/Icon_Tick_green.svg": "/clevertec-library/static/media/Icon_Tick_green.f8ad084261815f5a72395119b8099c37.svg",
+    "static/media/Icon_Slash.svg": "/clevertec-library/static/media/Icon_Slash.5049db2f1111b033ded6f4c347257986.svg",
+    "main.904ef815.css.map": "/clevertec-library/static/css/main.904ef815.css.map",
+    "main.8b853daf.js.map": "/clevertec-library/static/js/main.8b853daf.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.904ef815.css",
+    "static/js/main.8b853daf.js"
+  ]
+}
