@@ -30,10 +30,7 @@ export const registerSlice = createSlice({
   name: 'registartion',
   initialState,
   reducers: {
-    setRegistrationData: (state, action: PayloadAction<RegistrationType | null>) => {
-      state.data = action.payload;
-    },
-    registrationRequest: (state) => {
+    registrationRequest: (state, _: PayloadAction<RegistrationType>) => {
       state.loading = true;
       state.error = false;
       state.dataError = false;
@@ -56,11 +53,6 @@ export const registerSlice = createSlice({
   },
 });
 
-export const {
-  registrationRequest,
-  registrationSuccess,
-  registrationDataFailed,
-  registrationFailed,
-  setRegistrationData,
-} = registerSlice.actions;
+export const { registrationRequest, registrationSuccess, registrationDataFailed, registrationFailed } =
+  registerSlice.actions;
 export const registerReducer = registerSlice.reducer;

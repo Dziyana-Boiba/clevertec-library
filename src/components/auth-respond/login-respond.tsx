@@ -1,17 +1,15 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-import { loginSelector } from '../../redux/login/selector';
+import { clearLoginData } from '../../redux/login/slice';
 import { Button } from '../common/button/button';
 
 import './auth-respond.scss';
 
 export const LoginRespond = () => {
-  const { data } = useSelector(loginSelector);
   const dispatch = useDispatch();
 
   const clickHandler = () => {
-    /* dispatch({ type: LOGIN, inputs }); */
-    console.log(data);
+    dispatch(clearLoginData());
   };
 
   return (

@@ -1,4 +1,4 @@
-const loginValidation = (value: string) => {
+const usernameValidation = (value: string) => {
   const latin = /[A-Za-z]/;
   const numbers = /[0-9]/;
 
@@ -39,7 +39,7 @@ const passwordValidation = (value: string) => {
 };
 
 const phoneNumberValidation = (value: string) => {
-  if (value.includes('x') || value.length < 17) {
+  if (value.includes('x') || value.trim().length < 19) {
     return { valid: false, messageType: 'notValid' };
   }
   const phoneCode = value.slice(6, 8);
@@ -52,7 +52,7 @@ const phoneNumberValidation = (value: string) => {
 };
 
 const emailValidation = (value: string) => {
-  const email = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+  const email = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/; // eslint-disable-line
 
   if (!email.test(String(value))) {
     return { valid: false, messageType: 'email' };
@@ -64,26 +64,31 @@ const emailValidation = (value: string) => {
 export const validateInput = (type: string, value: string) => {
   let result = { valid: false, messageType: '' };
 
+  if (!value) {
+    return { valid: false, messageType: 'required' };
+  }
+
   switch (type) {
     case 'username':
-      result = value === '' ? { valid: false, messageType: 'required' } : loginValidation(value);
+      result = usernameValidation(value);
       break;
     case 'password':
-      result = value === '' ? { valid: false, messageType: 'required' } : passwordValidation(value);
+      result = passwordValidation(value);
       break;
     case 'firstName':
-      result = value === '' ? { valid: false, messageType: 'required' } : { valid: true, messageType: '' };
+      result = { valid: true, messageType: '' };
       break;
     case 'lastName':
-      result = value === '' ? { valid: false, messageType: 'required' } : { valid: true, messageType: '' };
+      result = { valid: true, messageType: '' };
       break;
     case 'phone':
-      result = value === '' ? { valid: false, messageType: 'required' } : phoneNumberValidation(value);
+      result = phoneNumberValidation(value);
       break;
     case 'email':
-      result = value === '' ? { valid: false, messageType: 'required' } : emailValidation(value);
+      result = emailValidation(value);
       break;
     default:
+      result = { valid: true, messageType: '' };
       break;
   }
 

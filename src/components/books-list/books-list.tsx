@@ -27,22 +27,22 @@ export const BooksList = ({ isListView }: Props) => {
     navigate(`${id}`);
   };
 
-  let currentCategory: CategoryType | null = null;
+  let categoryName = 'all';
 
   if (categoriesData && category !== 'all') {
-    currentCategory = categoriesData.find((item: CategoryType) => item.path === category);
+    const currentCategory = categoriesData.find((item: CategoryType) => item.path === category?.toLowerCase());
+
+    categoryName = currentCategory ? currentCategory.name : 'all';
   }
 
   let currentBooksList = booksList;
 
-  if (booksList && category !== 'all' && currentCategory) {
-    currentBooksList = booksList.filter(({ categories }) => categories && categories.includes(currentCategory.name));
+  if (booksList && categoryName !== 'all') {
+    currentBooksList = booksList.filter(({ categories }) => categories && categories.includes(categoryName));
   }
 
   if (search && currentBooksList) {
-    currentBooksList = currentBooksList.filter((item: BookType) =>
-      item.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())
-    );
+    currentBooksList = currentBooksList.filter((item: BookType) => item.title.toLowerCase().includes(search));
   }
 
   if (booksList && currentBooksList) {

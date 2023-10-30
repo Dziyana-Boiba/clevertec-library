@@ -1,3 +1,4 @@
+import { Task } from 'redux-saga';
 import { call, cancel, fork, put, take } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
 
@@ -20,7 +21,7 @@ export function* getCategories(signal: AbortSignal) {
 }
 
 export function* categoriesSaga() {
-  let apiCall;
+  let apiCall: Task | null = null;
   let abortController = new AbortController();
 
   while (true) {

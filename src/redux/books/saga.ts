@@ -1,3 +1,4 @@
+import { Task } from 'redux-saga';
 import { call, cancel, fork, put, take } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
 
@@ -18,7 +19,7 @@ function* getBooks(signal: AbortSignal) {
 }
 
 export function* booksListSaga() {
-  let apiCall;
+  let apiCall: Task | null = null;
   let abortController = new AbortController();
 
   while (true) {

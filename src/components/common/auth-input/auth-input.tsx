@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Path, useForm } from 'react-hook-form';
+import React, { ChangeEvent, FocusEvent, useEffect, useState } from 'react';
+import { UseFormRegisterReturn } from 'react-hook-form';
 
 import { ReactComponent as IconEyeClosed } from '../../../assets/images/Icon_Eye_closed.svg';
 import { ReactComponent as IconEyeOpen } from '../../../assets/images/Icon_Eye_Open.svg';
@@ -8,43 +8,57 @@ import { validateInput } from '../../../utils/validation';
 
 import { ErrorMessage } from './error-message';
 
-interface InputObject {
-  username?: string;
-  password?: string;
-  firstName?: string;
-  lastName?: string;
-  phone?: string;
-  email?: string;
-}
-
 type Props = {
-  inputName: Path<InputObject>;
-  inputs: InputObject;
-  error: InputObject;
-  setInputs: (value: InputObject) => void;
-  setError: (value: InputObject) => void;
+  register: UseFormRegisterReturn;
+  inputName: string;
   label: string;
   assistiveText?: string;
   type: string;
+  showPassToggle?: boolean;
+  showTick?: boolean;
+  dataError?: boolean;
+  needValidation?: boolean;
 };
-/* eslint-disable no-console */
-export const AuthInput = ({ inputName, inputs, error, setError, setInputs, label, assistiveText, type }: Props) => {
-  const { register, watch } = useForm<InputObject>();
+
+export const AuthInput = ({
+  register,
+  needValidation,
+  dataError,
+  showPassToggle,
+  showTick,
+  inputName,
+  label,
+  assistiveText,
+  type,
+}: Props) => {
   const [showPassword, setShowPassword] = useState(false);
+  const [inputText, setInputText] = useState('');
+  const [inputError, setInputError] = useState('');
 
   const showPasswordHandler = () => {
     setShowPassword((prevState) => !prevState);
   };
 
-  const checkEmptyField = (e) => {
+  useEffect(() => {
+    setInputText('');
+    setInputError('');
+  }, [inputName]);
+
+  const checkEmptyField = (e: FocusEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
-    const result = validateInput(name, value);
+    if (needValidation) {
+      const result = validateInput(name, value);
 
-    setError((prevState: InputObject) => ({ ...prevState, [name]: result.messageType }));
+      setInputError(result.messageType);
+    } else if (value === '') {
+      setInputError('required');
+    } else {
+      setInputError('');
+    }
   };
 
-  const onChangeHandler = (e) => {
+  const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
     if (name === 'phone') {
@@ -58,15 +72,17 @@ export const AuthInput = ({ inputName, inputs, error, setError, setInputs, label
         digitValue[8] ? digitValue[8] : 'x'
       }`;
 
-      setInputs((prev: InputObject) => ({ ...prev, [name]: formatedValue }));
+      setInputText(formatedValue);
     } else {
-      setInputs((prev: InputObject) => ({ ...prev, [name]: value }));
+      setInputText(value);
     }
 
-    if (name === 'username' || name === 'password') {
+    if (needValidation && (name === 'username' || name === 'password')) {
       const result = validateInput(name, value);
 
-      setError((prev: InputObject) => ({ ...prev, [name]: result.messageType }));
+      setInputError(result.messageType);
+    } else {
+      setInputError('');
     }
   };
 
@@ -74,30 +90,35 @@ export const AuthInput = ({ inputName, inputs, error, setError, setInputs, label
     <div className='input-container'>
       <div className='input-field'>
         <input
-          type={type === 'password' ? (showPassword ? 'text' : 'password') : type}
-          {...register(inputName, {
-            onBlur: (e) => checkEmptyField(e),
-            onChange: (e) => onChangeHandler(e),
-            required: true,
-          })}
-          value={inputs[inputName]}
+          id={inputName}
+          type={showPassword ? 'text' : type}
+          {...register}
+          onBlur={(e) => {
+            checkEmptyField(e);
+            register.onBlur(e);
+          }}
+          onChange={(e) => {
+            onChangeHandler(e);
+            register.onChange(e);
+          }}
+          value={inputText}
           required={true}
         />
-        <label>{label}</label>
+        <label htmlFor={inputName}>{label}</label>
 
-        {inputName === 'password' && (
+        {showPassToggle && (
           <React.Fragment>
-            {!error[inputName] && inputs[inputName] && <IconTickGreen />}
+            {showTick && !inputError && inputText && <IconTickGreen />}
             <button type='button' onClick={showPasswordHandler}>
               {showPassword ? <IconEyeOpen /> : <IconEyeClosed />}
             </button>
           </React.Fragment>
         )}
 
-        <span className={`input-bottom-line ${error[inputName] ? 'error' : ''}`} />
+        <span className={`input-bottom-line ${inputError || dataError ? 'error' : ''}`} />
       </div>
-      {!error[inputName] && <span className='assistive-text'>{assistiveText}</span>}
-      {error[inputName] && <ErrorMessage error={error} inputType={inputName} />}
+      {!inputError && <span className='assistive-text'>{assistiveText}</span>}
+      {inputError && <ErrorMessage error={inputError} inputType={inputName} />}
     </div>
   );
 };

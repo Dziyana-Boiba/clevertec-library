@@ -1,16 +1,28 @@
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { SubmitHandler } from 'react-hook-form/dist/types';
 import { useDispatch } from 'react-redux';
-import { NavLink } from 'react-router-dom';
 
-import { registrationRequest, setRegistrationData } from '../../redux/registration/slice';
+import { registrationRequest } from '../../redux/registration/slice';
 import { RegistrationType } from '../../types/auth';
+import { validateInput } from '../../utils/validation';
 import { AuthInput } from '../common/auth-input/auth-input';
 
 import './form.scss';
 
-const registrationSteps = [
+type Input = {
+  inputName: string;
+  type: string;
+  label: string;
+  assistiveText: string;
+};
+
+type Steps = {
+  firstInput: Input;
+  secondInput: Input;
+  buttonText: string;
+};
+
+const registrationSteps: Steps[] = [
   {
     firstInput: {
       inputName: 'username',
@@ -49,97 +61,71 @@ const registrationSteps = [
 ];
 
 type Props = {
-  contentView: string;
   registrationStep: number;
-  setRegistrationStep: (value: any) => void;
+  setRegistrationStep: (value: number) => void;
 };
 
-export const RegistrationForm = ({ contentView, registrationStep, setRegistrationStep }: Props) => {
-  const [inputs, setInputs] = useState<RegistrationType>({
-    email: '',
-    username: '',
-    password: '',
-    firstName: '',
-    lastName: '',
-    phone: '',
-  });
+export const RegistrationForm = ({ registrationStep, setRegistrationStep }: Props) => {
+  const { register, handleSubmit, watch } = useForm<RegistrationType>();
 
-  const [error, setError] = useState<RegistrationType>({
-    username: '',
-    password: '',
-    firstName: '',
-    lastName: '',
-    phone: '',
-    email: '',
-  });
-
-  // const { handleSubmit } = useForm<InputObject>();
-
-  /*  const submitFormHandler: SubmitHandler<InputObject> = (data) => {
-    console.log('form data', data, error);
-  };  */
   const dispatch = useDispatch();
 
-  const submitFormHandler = () => {
-    dispatch(setRegistrationData(inputs));
-    dispatch(registrationRequest(inputs));
+  const submitFormHandler: SubmitHandler<RegistrationType> = (data) => {
+    if (registrationStep === 3) {
+      dispatch(registrationRequest(data));
+    } else {
+      setRegistrationStep(registrationStep + 1);
+    }
   };
 
-  const toggleStepHandler = (event) => {
-    event?.preventDefault();
-    const firstInputName = registrationSteps[registrationStep - 1].firstInput.inputName;
-    const secondInputName = registrationSteps[registrationStep - 1].secondInput.inputName;
+  const { firstInput, secondInput, buttonText } = registrationSteps[registrationStep - 1];
 
-    if (!inputs[firstInputName]) {
-      setError((prevState: RegistrationType) => ({ ...prevState, [firstInputName]: 'required' }));
-    }
-
-    if (!inputs[secondInputName]) {
-      setError((prevState: RegistrationType) => ({ ...prevState, [secondInputName]: 'required' }));
-    }
-
-    if (!error[firstInputName] && !error[secondInputName] && inputs[firstInputName] && inputs[secondInputName]) {
-      if (registrationStep === 3) {
-        submitFormHandler();
-      } else {
-        setRegistrationStep((prevState: number) => (prevState < 3 ? prevState + 1 : 3));
-      }
-    }
+  const inputText = {
+    username: watch('username'),
+    password: watch('password'),
+    firstName: watch('firstName'),
+    lastName: watch('lastName'),
+    phone: watch('phone') ? watch('phone').replace('x', '') : watch('phone'),
+    email: watch('email'),
   };
 
   return (
-    <form>
+    <form onSubmit={handleSubmit(submitFormHandler)}>
       <AuthInput
-        inputName={registrationSteps[registrationStep - 1].firstInput.inputName}
-        type={registrationSteps[registrationStep - 1].firstInput.type}
-        inputs={inputs}
-        error={error}
-        setInputs={setInputs}
-        setError={setError}
-        label={contentView === 'registration' ? registrationSteps[registrationStep - 1].firstInput.label : 'Логин'}
-        assistiveText={registrationSteps[registrationStep - 1].firstInput.assistiveText}
+        register={register(
+          firstInput.inputName as 'username' | 'password' | 'firstName' | 'lastName' | 'phone' | 'email',
+          { value: '' }
+        )}
+        needValidation={true}
+        showPassToggle={firstInput.type === 'password' ? true : false}
+        showTick={firstInput.type === 'password' ? true : false}
+        inputName={firstInput.inputName}
+        label={firstInput.label}
+        assistiveText={firstInput.assistiveText}
+        type={firstInput.type}
       />
-
       <AuthInput
-        inputName={registrationSteps[registrationStep - 1].secondInput.inputName}
-        type={registrationSteps[registrationStep - 1].secondInput.type}
-        inputs={inputs}
-        error={error}
-        setInputs={setInputs}
-        setError={setError}
-        label={contentView === 'registration' ? registrationSteps[registrationStep - 1].secondInput.label : 'Логин'}
-        assistiveText={registrationSteps[registrationStep - 1].secondInput.assistiveText}
+        register={register(
+          secondInput.inputName as 'username' | 'password' | 'firstName' | 'lastName' | 'phone' | 'email',
+          { value: '' }
+        )}
+        needValidation={true}
+        showPassToggle={secondInput.type === 'password' ? true : false}
+        showTick={secondInput.type === 'password' ? true : false}
+        inputName={secondInput.inputName}
+        label={secondInput.label}
+        assistiveText={secondInput.assistiveText}
+        type={secondInput.type}
       />
-
-      {contentView === 'registration' ? (
-        <span className='forgot-btn-field' />
-      ) : (
-        <NavLink className='forgot-btn' to='/forgot-pass'>
-          Забыли логин или пароль?
-        </NavLink>
-      )}
-      <button type='submit' className='submit-btn' onClick={(event) => toggleStepHandler(event)}>
-        {registrationSteps[registrationStep - 1].buttonText}
+      <button
+        disabled={
+          !validateInput(firstInput.inputName, inputText[firstInput.inputName as keyof typeof inputText]).valid ||
+          !validateInput(secondInput.inputName, inputText[secondInput.inputName as keyof typeof inputText]).valid
+        }
+        type='submit'
+        className='submit-btn'
+      >
+        {buttonText}
       </button>
     </form>
   );

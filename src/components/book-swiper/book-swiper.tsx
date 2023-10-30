@@ -32,7 +32,7 @@ export const BookSwiper = ({ images }: Props) => {
           </div>
         </React.Fragment>
       )}
-      {images && (
+      {images && images.length > 0 && (
         <div>
           <Swiper
             loop={true}
@@ -40,16 +40,16 @@ export const BookSwiper = ({ images }: Props) => {
             modules={[FreeMode, Thumbs, Controller]}
             className='swiper-top'
           >
-            {images.map((img: ImageType) => (
-              <SwiperSlide key={'top'.concat(img.url)}>
-                <img src={img.url} alt='The page of the book' />
+            {images.map(({ url }: ImageType) => (
+              <SwiperSlide key={'top'.concat(url ? url : '')}>
+                <img src={url ? url : ''} alt='The page of the book' />
               </SwiperSlide>
             ))}
           </Swiper>
           <Swiper pagination={true} modules={[Pagination]} className='swiper-mobile'>
-            {images.map((img: ImageType) => (
-              <SwiperSlide key={'mobile'.concat(img.url)}>
-                <img src={img.url} alt='The page of the book' />
+            {images.map(({ url }: ImageType) => (
+              <SwiperSlide key={'mobile'.concat(url ? url : '')}>
+                <img src={url ? url : ''} alt='The page of the book' />
               </SwiperSlide>
             ))}
           </Swiper>
@@ -70,9 +70,9 @@ export const BookSwiper = ({ images }: Props) => {
             className='swiper-bottom'
           >
             {images.length > 0 &&
-              images.map((img: ImageType) => (
-                <SwiperSlide key={'bottom'.concat(img.url)}>
-                  <img src={img.url} alt='The page of the book' />
+              images.map(({ url }: ImageType) => (
+                <SwiperSlide key={'bottom'.concat(url ? url : '')}>
+                  <img src={url ? url : ''} alt='The page of the book' />
                 </SwiperSlide>
               ))}
           </Swiper>

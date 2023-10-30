@@ -3,13 +3,13 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 export type AppState = {
   isBurgerOpen: boolean;
   ratingDown: boolean;
-  search: string | null;
+  search: string;
 };
 
 const initialState = {
   isBurgerOpen: false,
   ratingDown: true,
-  search: null,
+  search: '',
 };
 
 export const appSlice = createSlice({
@@ -22,7 +22,7 @@ export const appSlice = createSlice({
     setFilter: (state) => {
       state.ratingDown = !state.ratingDown;
     },
-    setSearch: (state, action: PayloadAction<string | null>) => {
+    setSearch: (state, action: PayloadAction<string>) => {
       state.search = action.payload;
     },
   },

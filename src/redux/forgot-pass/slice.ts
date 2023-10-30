@@ -1,6 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { STATUS } from '../../constants/common';
+import { ForgotPassType } from '../../types/auth';
 
 export type ForgotPassState = {
   loading: boolean;
@@ -18,7 +19,7 @@ export const forgotPassSlice = createSlice({
   name: 'forgotPass',
   initialState,
   reducers: {
-    forgotPassRequest: (state) => {
+    forgotPassRequest: (state, _: PayloadAction<ForgotPassType>) => {
       state.error = false;
       state.loading = true;
       state.status = null;

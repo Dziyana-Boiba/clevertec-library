@@ -66,7 +66,7 @@ export type BookDetailsType = {
   ISBN: string | null;
   producer: string | null;
   authors: string[] | null;
-  images: ImageType[];
+  images: ImageType[] | null;
   categories: string[];
   comments: CommentType[] | null;
   booking: BookingType | null;

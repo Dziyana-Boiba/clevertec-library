@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -12,12 +12,8 @@ import { registerSelector } from '../../redux/registration/selector';
 
 import './auth.scss';
 
-type Props = {
-  contentView: string;
-};
-
-export const RegistrationPage = ({ contentView }: Props) => {
-  const [registrationStep, setRegistrationStep] = useState(1);
+export const RegistrationPage = () => {
+  const [registrationStep, setRegistrationStep] = useState<number>(1);
 
   const navigate = useNavigate();
 
@@ -25,10 +21,6 @@ export const RegistrationPage = ({ contentView }: Props) => {
     navigate(RoutePath.auth);
   };
   const { loading, status, dataError, error } = useSelector(registerSelector);
-
-  useEffect(() => {
-    console.log(status);
-  }, [status]);
 
   if (status === STATUS.ERROR) {
     return (
@@ -39,8 +31,6 @@ export const RegistrationPage = ({ contentView }: Props) => {
   }
 
   if (status === STATUS.SUCCESS) {
-    console.log('respond register status', status);
-
     return <RegistrationRespond respondType='success' />;
   }
 
@@ -52,11 +42,7 @@ export const RegistrationPage = ({ contentView }: Props) => {
           <h4>Регистрация</h4>
           <span>{registrationStep} шаг из 3</span>
         </div>
-        <RegistrationForm
-          contentView={contentView}
-          registrationStep={registrationStep}
-          setRegistrationStep={setRegistrationStep}
-        />
+        <RegistrationForm registrationStep={registrationStep} setRegistrationStep={setRegistrationStep} />
         <div className='auth-block_footer'>
           <span>Есть учётная запись?</span>
           <button type='button' onClick={openLoginForm}>

@@ -36,7 +36,7 @@ export const SelectBar = ({ selectView, isListView }: Props) => {
   const setSearchHandler = (e: React.SyntheticEvent) => {
     const target = e.target as HTMLInputElement;
 
-    dispatch(setSearch(target.value.trim()));
+    dispatch(setSearch(target.value.trim().toLowerCase()));
   };
 
   return (

@@ -24,11 +24,13 @@ export const BookCard = ({ book, isListView, onClick }: Props) => {
     }
   };
 
-  const replace = (title: string) => {
+  const replace = (title: string, searchText: string) => {
     const splitedTitle = title.split(new RegExp(`(${search})`, 'gi'));
 
     return (
-      <p>{splitedTitle.map((item) => (item.toLowerCase() === search.toLowerCase() ? <span>{item}</span> : item))}</p>
+      <p>
+        {splitedTitle.map((item) => (item.toLowerCase() === searchText.toLowerCase() ? <span>{item}</span> : item))}
+      </p>
     );
   };
 
@@ -42,12 +44,16 @@ export const BookCard = ({ book, isListView, onClick }: Props) => {
       data-test-id='card'
     >
       <div className='card-container_book-image'>
-        {book.image ? <img loading='lazy' src={book.image.url} alt='Title page of the book' /> : <CatIcon />}
+        {book.image && book.image.url ? (
+          <img loading='lazy' src={book.image.url} alt='Title page of the book' />
+        ) : (
+          <CatIcon />
+        )}
       </div>
       <div className='card-container_content'>
         {!isListView && <RatingBar rating={book.rating} />}
         <div className='title-overflow-container'>
-          <p>{search ? replace(book.title) : book.title}</p>
+          <p>{search ? replace(book.title, search) : book.title}</p>
         </div>
         <div className='author-overflow-container'>
           <p>

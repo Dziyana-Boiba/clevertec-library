@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
+import axios, { AxiosInstance, InternalAxiosRequestConfig } from 'axios';
 
 import { API_HOST } from '../constants/api-url';
 import { TOKEN_JWT_LS } from '../constants/auth';
@@ -10,12 +10,14 @@ export const api: AxiosInstance = axios.create({
   },
 });
 
-api.interceptors.request.use((config: AxiosRequestConfig) => {
+api.interceptors.request.use((config: InternalAxiosRequestConfig) => {
   const token = localStorage.getItem(TOKEN_JWT_LS);
 
-  if (token && config && config.headers) {
-    config.headers.set('Authorization', `Bearer ${JSON.parse(token)}`);
+  const newConfig = { ...config };
+
+  if (token && newConfig && newConfig.headers) {
+    newConfig.headers.Authorization = `Bearer ${JSON.parse(token)}`;
   }
 
-  return config;
+  return newConfig;
 });

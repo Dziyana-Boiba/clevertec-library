@@ -1,7 +1,9 @@
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, redirect, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import Avatar from '../../assets/images/avatar.png';
+import { ReactComponent as ArrowLeftIcon } from '../../assets/images/Icon_Chevron_Left.svg';
 import { ReactComponent as MenuIcon } from '../../assets/images/Icon_Menu.svg';
 import LogoPNG from '../../assets/images/logo.png';
 import { appStateSelector } from '../../redux/app-state/selector';
@@ -12,7 +14,17 @@ import './layout.scss';
 export const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { category, bookId } = useParams();
+  const [isBookPage, setIsBookPage] = useState(false);
   const { isBurgerOpen } = useSelector(appStateSelector);
+
+  useEffect(() => {
+    if (bookId) {
+      setIsBookPage(true);
+    } else {
+      setIsBookPage(false);
+    }
+  }, [bookId]);
 
   const sidebarHandler = () => {
     dispatch(setBurgerOpen());
@@ -29,16 +41,17 @@ export const Header = () => {
         <img className='header_logo' src={LogoPNG} alt='Cleverland Logo' />
       </Link>
       <MenuIcon className='menu-icon' onClick={sidebarHandler} />
-      <button
-        type='button'
-        data-test-id='button-burger'
-        onClick={sidebarHandler}
-        className={isBurgerOpen ? 'menu-btn open' : 'menu-btn'}
-      >
-        <span className='first-line' />
-        <span className='second-line' />
-        <span className='last-line' />
-      </button>
+      {isBookPage ? (
+        <button type='button' onClick={() => navigate(`/books/${category}`)} className='menu-btn'>
+          <ArrowLeftIcon />
+        </button>
+      ) : (
+        <button type='button' onClick={sidebarHandler} className={isBurgerOpen ? 'menu-btn open' : 'menu-btn'}>
+          <span className='first-line' />
+          <span className='second-line' />
+          <span className='last-line' />
+        </button>
+      )}
 
       <div className='header_aside'>
         <h3>Библиотека</h3>

@@ -1,45 +1,22 @@
-import { useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { SubmitHandler } from 'react-hook-form/dist/types';
 import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
-import { ReactComponent as IconEyeClosed } from '../../assets/images/Icon_Eye_closed.svg';
-import { ReactComponent as IconEyeOpen } from '../../assets/images/Icon_Eye_Open.svg';
 import { loginRequest } from '../../redux/login/slice';
 import { LoginType } from '../../types/auth';
+import { AuthInput } from '../common/auth-input/auth-input';
 
 import './form.scss';
 
 type Props = {
-  contentView: string;
-  errorAPI: boolean;
+  dataError: boolean;
 };
 
-export const AuthForm = ({ contentView, errorAPI }: Props) => {
+export const LoginForm = ({ dataError }: Props) => {
   const dispatch = useDispatch();
 
-  const [showPassword, setShowPassword] = useState(false);
-  const showPasswordHandler = () => {
-    setShowPassword((prevState) => !prevState);
-  };
-
-  const [error, setError] = useState<LoginType>({
-    identifier: '',
-    password: '',
-  });
-
-  const { register, handleSubmit, control } = useForm<LoginType>({ mode: 'all' });
-
-  const checkEmptyField = (e) => {
-    const { name, value } = e.target;
-
-    if (value === '') {
-      setError((prevState: LoginType) => ({ ...prevState, [name]: 'required' }));
-    } else {
-      setError((prevState: LoginType) => ({ ...prevState, [name]: '' }));
-    }
-  };
+  const { handleSubmit, register } = useForm<LoginType>({ mode: 'all' });
 
   const submitFormHandler: SubmitHandler<LoginType> = (data) => {
     dispatch(loginRequest(data));
@@ -47,26 +24,46 @@ export const AuthForm = ({ contentView, errorAPI }: Props) => {
 
   return (
     <form onSubmit={handleSubmit(submitFormHandler)}>
-      <div className='input-container'>
+      <AuthInput
+        dataError={dataError}
+        register={register('identifier')}
+        inputName='identifier'
+        label='Логин'
+        type='text'
+      />
+
+      {/*       <div className='input-container'>
         <div className='input-field'>
           <input
+            id='identifier'
             type='text'
             {...register('identifier', {
-              onBlur: (e) => checkEmptyField(e),
+              onChange: (e) => setInputText(e.target.value),
               required: true,
             })}
+            value={inputText}
             required={true}
           />
 
-          <label>Логин</label>
-          <span className={`input-bottom-line ${error.identifier || errorAPI ? 'error' : ''}`} />
+          <label htmlFor='identifier'>Логин</label>
+          <span className={`input-bottom-line ${error.identifier || dataError ? 'error' : ''}`} />
         </div>
-        {error.identifier && <span className='assistive-text error'>Поле не может быть пустым</span>}
-      </div>
+        {error.identifier && <span className='assistive-text error'>Поле не может быть пустым</span>} 
+      </div> */}
 
-      <div className='input-container'>
+      <AuthInput
+        dataError={dataError}
+        register={register('password')}
+        inputName='password'
+        label='Пароль'
+        type='password'
+        showPassToggle={true}
+      />
+
+      {/*       <div className='input-container'>
         <div className='input-field'>
           <input
+            id='password'
             type={showPassword ? 'text' : 'password'}
             {...register('password', {
               onBlur: (e) => checkEmptyField(e),
@@ -74,19 +71,19 @@ export const AuthForm = ({ contentView, errorAPI }: Props) => {
             })}
             required={true}
           />
-          <label>Пароль</label>
+          <label htmlFor='password'>Пароль</label>
 
           <button type='button' onClick={showPasswordHandler}>
             {showPassword ? <IconEyeOpen /> : <IconEyeClosed />}
           </button>
 
-          <span className={`input-bottom-line ${error.password || errorAPI ? 'error' : ''}`} />
+          <span className={`input-bottom-line ${error.password || dataError ? 'error' : ''}`} />
         </div>
         {error.password && <span className='assistive-text error'>Поле не может быть пустым</span>}
-      </div>
+      </div> */}
 
       <NavLink className='forgot-btn' to='/forgot-pass'>
-        {errorAPI ? (
+        {dataError ? (
           <span className='forgot-btn_error'>
             <span className='error_red'>Неверный логин или пароль!</span>
             <br />

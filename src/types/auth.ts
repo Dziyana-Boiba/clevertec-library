@@ -26,7 +26,7 @@ export type ForgotPassType = { email: string };
 
 export type ResetPassType = PasswordType & { code: string };
 
-export type PassInputsType = PasswordType & { email: string };
+export type PassInputsType = PasswordType & ForgotPassType;
 
 export type UserType = {
   id: number;

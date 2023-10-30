@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { TOKEN_JWT_LS } from '../../constants/auth';
-import { UserType } from '../../types/auth';
+import { LoginType, UserType } from '../../types/auth';
 
 type LoginState = {
   data: { token: string | null; identifier: string; password: string; user: UserType | null };
@@ -26,7 +26,7 @@ export const loginSlice = createSlice({
   name: 'login',
   initialState,
   reducers: {
-    loginRequest: (state) => {
+    loginRequest: (state, _: PayloadAction<LoginType>) => {
       state.data.token = null;
       state.data.user = null;
       state.dataError = false;
@@ -46,8 +46,11 @@ export const loginSlice = createSlice({
       state.error = true;
       state.loading = false;
     },
+    clearLoginData: (state) => {
+      state.error = false;
+    },
   },
 });
 
-export const { loginRequest, loginSuccess, loginDataFailed, loginFailed } = loginSlice.actions;
+export const { loginRequest, loginSuccess, loginDataFailed, loginFailed, clearLoginData } = loginSlice.actions;
 export const loginReducer = loginSlice.reducer;

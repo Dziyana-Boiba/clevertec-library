@@ -38,7 +38,7 @@ export const BookPage = () => {
       {bookDetails && (
         <div className='book-page_content'>
           <BookDescription bookDetails={bookDetails} />
-          <BookRating rating={bookDetails?.rating} />
+          <BookRating rating={bookDetails.rating} />
           <BookDetailedInfo bookDetails={bookDetails} />
           <BookReviews bookDetails={bookDetails} />
         </div>

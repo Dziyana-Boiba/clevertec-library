@@ -1,17 +1,17 @@
 import { HashRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 import { RequireAuth } from './components/router/required-auth';
+import { TermsContentView } from './constants/common';
 import { RoutePath } from './constants/routes';
 import { AuthLayout } from './global/auth-layout/auth-layout';
 import { Layout } from './global/layout/layout';
 import { SidebarLayout } from './global/sidebar-layout/sidebar-layout';
-import { AuthPage } from './pages/auth/auth';
 import { ForgotPassPage } from './pages/auth/forgot-pass';
+import { LoginPage } from './pages/auth/login';
 import { RegistrationPage } from './pages/auth/registration';
 import { BookPage } from './pages/book';
 import { MainPage } from './pages/main';
 import { Terms } from './pages/terms';
-import { TermsContentView } from './constants/common';
 
 import './index.css';
 
@@ -20,8 +20,8 @@ export const App = () => (
     <Routes>
       <Route path='/' element={<AuthLayout />}>
         <Route index={true} element={<Navigate to={RoutePath.auth} />} />
-        <Route path={RoutePath.auth} element={<AuthPage contentView='auth' />} />
-        <Route path={RoutePath.registration} element={<RegistrationPage contentView='registration' />} />
+        <Route path={RoutePath.auth} element={<LoginPage />} />
+        <Route path={RoutePath.registration} element={<RegistrationPage />} />
         <Route path={RoutePath.forgotPass} element={<ForgotPassPage />} />
       </Route>
       <Route element={<RequireAuth />}>

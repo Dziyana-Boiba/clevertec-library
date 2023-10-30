@@ -25,10 +25,7 @@ export const resetPassSlice = createSlice({
   name: 'resetPass',
   initialState,
   reducers: {
-    setData: (state, action: PayloadAction<ResetPassType | null>) => {
-      state.data = action.payload;
-    },
-    resetPassRequest: (state) => {
+    resetPassRequest: (state, _: PayloadAction<ResetPassType>) => {
       state.error = false;
       state.loading = true;
       state.status = null;
@@ -41,8 +38,11 @@ export const resetPassSlice = createSlice({
       state.error = true;
       state.loading = false;
     },
+    clearResetPassData: (state) => {
+      state.error = false;
+    },
   },
 });
 
-export const { resetPassRequest, resetPassSuccess, resetPassFailed } = resetPassSlice.actions;
+export const { resetPassRequest, resetPassSuccess, resetPassFailed, clearResetPassData } = resetPassSlice.actions;
 export const resetPassReducer = resetPassSlice.reducer;
