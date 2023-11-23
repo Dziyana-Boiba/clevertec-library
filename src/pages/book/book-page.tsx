@@ -20,6 +20,11 @@ export const BookPage = () => {
   const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+    });
+
     const id = bookId ? bookId : null;
 
     dispatch(getBookDetailsRequest(id));

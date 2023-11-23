@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { SubmitHandler } from 'react-hook-form/dist/types';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
@@ -14,6 +15,7 @@ type Props = {
 };
 
 export const LoginForm = ({ dataError }: Props) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const { handleSubmit, register } = useForm<LoginType>({ mode: 'all' });
@@ -28,74 +30,33 @@ export const LoginForm = ({ dataError }: Props) => {
         dataError={dataError}
         register={register('identifier')}
         inputName='identifier'
-        label='Логин'
+        label={t('auth.LOGIN')}
         type='text'
       />
-
-      {/*       <div className='input-container'>
-        <div className='input-field'>
-          <input
-            id='identifier'
-            type='text'
-            {...register('identifier', {
-              onChange: (e) => setInputText(e.target.value),
-              required: true,
-            })}
-            value={inputText}
-            required={true}
-          />
-
-          <label htmlFor='identifier'>Логин</label>
-          <span className={`input-bottom-line ${error.identifier || dataError ? 'error' : ''}`} />
-        </div>
-        {error.identifier && <span className='assistive-text error'>Поле не может быть пустым</span>} 
-      </div> */}
 
       <AuthInput
         dataError={dataError}
         register={register('password')}
         inputName='password'
-        label='Пароль'
+        label={t('auth.PASSWORD')}
         type='password'
         showPassToggle={true}
       />
 
-      {/*       <div className='input-container'>
-        <div className='input-field'>
-          <input
-            id='password'
-            type={showPassword ? 'text' : 'password'}
-            {...register('password', {
-              onBlur: (e) => checkEmptyField(e),
-              required: true,
-            })}
-            required={true}
-          />
-          <label htmlFor='password'>Пароль</label>
-
-          <button type='button' onClick={showPasswordHandler}>
-            {showPassword ? <IconEyeOpen /> : <IconEyeClosed />}
-          </button>
-
-          <span className={`input-bottom-line ${error.password || dataError ? 'error' : ''}`} />
-        </div>
-        {error.password && <span className='assistive-text error'>Поле не может быть пустым</span>}
-      </div> */}
-
       <NavLink className='forgot-btn' to='/forgot-pass'>
         {dataError ? (
           <span className='forgot-btn_error'>
-            <span className='error_red'>Неверный логин или пароль!</span>
+            <span className='error_red'>{t('auth.INVALID_LOGIN_OR_PASSWORD')}!</span>
             <br />
-            Восстановить?
+            {t('auth.RECOVER_QUESTION')}?
           </span>
         ) : (
-          'Забыли логин или пароль?'
+          t('auth.FORGOT_LOGIN_OR_PASSWORD')
         )}
       </NavLink>
 
       <button type='submit' className='submit-btn'>
-        вход
+        {t('auth.LOGIN_ACTION')}
       </button>
     </form>
   );

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
@@ -10,8 +11,10 @@ import { appStateSelector } from '../../redux/app-state/selector';
 import { setBurgerOpen } from '../../redux/app-state/slice';
 
 import './layout.scss';
+import { LanguageSelect } from '../languages/languages-select';
 
 export const Header = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { category, bookId } = useParams();
@@ -54,15 +57,18 @@ export const Header = () => {
       )}
 
       <div className='header_aside'>
-        <h3>Библиотека</h3>
-        <div className='header_user'>
-          <span>Привет, Иван!</span>
-          <img className='header_user-avatar' src={Avatar} alt='User Avatar' />
-          <div className='header-user-menu'>
-            <button type='button'>Профиль</button>
-            <button type='button' onClick={logoutHandler}>
-              Выход
-            </button>
+        <h3>{t('main.LIBRARY')}</h3>
+        <div className='header_aside_right'>
+          <LanguageSelect />
+          <div className='header_user'>
+            {/* <span>Привет, Иван!</span> */}
+            <img className='header_user-avatar' src={Avatar} alt='User Avatar' />
+            <div className='header-user-menu'>
+              <button type='button'>{t('main.PROFILE')}</button>
+              <button type='button' onClick={logoutHandler}>
+                {t('main.LOGOUT')}
+              </button>
+            </div>
           </div>
         </div>
       </div>

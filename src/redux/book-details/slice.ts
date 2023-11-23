@@ -26,7 +26,7 @@ export const bookDetailsSlice = createSlice({
       state.data = null;
       state.id = action.payload;
     },
-    getBookDetailsSuccess: (state, action: PayloadAction<BookDetailsType>) => {
+    getBookDetailsSuccess: (state, action: PayloadAction<BookDetailsType | null>) => {
       state.loading = false;
       state.data = action.payload;
     },

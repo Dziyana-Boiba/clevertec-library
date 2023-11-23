@@ -117,7 +117,7 @@ export const AuthInput = ({
 
         <span className={`input-bottom-line ${inputError || dataError ? 'error' : ''}`} />
       </div>
-      {!inputError && <span className='assistive-text'>{assistiveText}</span>}
+      {!inputError && <div className='assistive-text'>{assistiveText}</div>}
       {inputError && <ErrorMessage error={inputError} inputType={inputName} />}
     </div>
   );

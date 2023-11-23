@@ -1,11 +1,12 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { ReactComponent as IconBack } from '../../assets/images/Icon_Chevron_Left.svg';
-import { ForgotPassRespond } from '../../components/auth-respond/forgot-pass-respond';
+import { AuthRespond } from '../../components/auth-respond/auth-respond';
 import { ForgotPassForm } from '../../components/forms/forgot-pass-form';
-import { TOKEN_JWT_LS } from '../../constants/auth';
+import { respondTextPath, TOKEN_JWT_LS } from '../../constants/auth';
 import { STATUS } from '../../constants/common';
 import { RoutePath } from '../../constants/routes';
 import { Loader } from '../../global/loader/loader';
@@ -15,6 +16,7 @@ import { resetPassSelector } from '../../redux/reset-pass/selector';
 import './auth.scss';
 
 export const ForgotPassPage = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   const hasSearchParams = !!location.search;
@@ -42,23 +44,15 @@ export const ForgotPassPage = () => {
   }
 
   if (forgotPassStatus === STATUS.SUCCESS && !resetPassStatus) {
-    return (
-      <React.Fragment>
-        <ForgotPassRespond respondType='emailSent' />;
-      </React.Fragment>
-    );
+    return <AuthRespond respond={respondTextPath.forgotPass.emailSent} />;
   }
 
   if (resetPassError) {
-    return (
-      <React.Fragment>
-        <ForgotPassRespond respondType='error' />;
-      </React.Fragment>
-    );
+    return <AuthRespond respond={respondTextPath.forgotPass.error} />;
   }
 
   if (resetPassStatus === STATUS.SUCCESS) {
-    return <ForgotPassRespond respondType='success' />;
+    return <AuthRespond respond={respondTextPath.forgotPass.success} />;
   }
 
   return (
@@ -68,22 +62,22 @@ export const ForgotPassPage = () => {
         <div className='return-field'>
           <button type='button' onClick={returnHandler} className='return-btn'>
             <IconBack />
-            вход в личный кабинет
+            {t('auth.GO_TO_LOGIN')}
           </button>
         </div>
 
         <div className='auth-block_header'>
-          <h4>Восстановление пароля</h4>
+          <h4> {t('auth.FORGOT_PASS_TITLE')}</h4>
         </div>
         <ForgotPassForm wrongEmail={forgotPassError} />
         <div className='auth-block_footer'>
           {hasSearchParams ? (
-            'После сохранения войдите в библиотеку, используя новый пароль'
+            t('auth.AFTER_SAVING_LOGIN')
           ) : (
             <React.Fragment>
-              <span>Нет учётной записи?</span>
+              <span> {t('auth.NO_ACCOUNT')}?</span>
               <button type='button' onClick={openRegistrationForm}>
-                Регистрация
+                {t('auth.REGISTRATION')}
               </button>
             </React.Fragment>
           )}

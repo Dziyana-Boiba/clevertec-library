@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { SubmitHandler } from 'react-hook-form/dist/types';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 
@@ -16,6 +17,7 @@ type Props = {
 };
 
 export const ForgotPassForm = ({ wrongEmail }: Props) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const location = useLocation();
   const hasSearchParams = !!location.search;
@@ -40,7 +42,7 @@ export const ForgotPassForm = ({ wrongEmail }: Props) => {
       <AuthInput
         register={register('password')}
         inputName='password'
-        label='Новый пароль'
+        label={t('auth.NEW_PASSWORD')}
         type='password'
         showPassToggle={true}
         needValidation={true}
@@ -48,19 +50,19 @@ export const ForgotPassForm = ({ wrongEmail }: Props) => {
       <AuthInput
         register={register('passwordConfirmation')}
         inputName='passwordConfirmation'
-        label='Пароль'
+        label={t('auth.PASSWORD')}
         type='password'
         showPassToggle={true}
       />
       {passwordConfirmationInput && passwordInput !== passwordConfirmationInput && (
-        <span className='error-message'>Пароли не совпадают</span>
+        <span className='error-message'>{t('auth.PASSWORDS_DO_NOT_MATCH')}</span>
       )}
       <button
         disabled={!validateInput('password', passwordInput).valid || passwordInput !== passwordConfirmationInput}
         type='submit'
         className='submit-btn'
       >
-        сохранить изменения
+        {t('auth.SAVE_CHANGES')}
       </button>
     </form>
   ) : (
@@ -72,11 +74,11 @@ export const ForgotPassForm = ({ wrongEmail }: Props) => {
         label='E-mail'
         type='email'
         needValidation={true}
-        assistiveText='На это email будет отправлено письмо с инструкциями по восстановлению пароля'
+        assistiveText={t('auth.INSTRUCTIONS_SENT_TO_EMAIL')}
       />
-      {wrongEmail && <span className='error-message'>этот адрес электронной почты не зарегистрирован</span>}
+      {wrongEmail && <span className='error-message'>{t('auth.EMAIL_NOT_REGISTERED')}</span>}
       <button disabled={!validateInput('email', emailInput).valid} type='submit' className='submit-btn'>
-        Восстановить
+        {t('auth.RECOVER_PASSWORD')}
       </button>
     </form>
   );

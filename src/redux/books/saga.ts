@@ -3,6 +3,7 @@ import { call, cancel, fork, put, take } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
 
 import { api } from '../../api/api';
+import { booksArray } from '../../assets/library-data/books';
 import { ApiURL } from '../../constants/api-url';
 import { BookType } from '../../types/books';
 
@@ -10,7 +11,9 @@ import { getBooksFailed, getBooksRequest, getBooksSuccess } from './slice';
 
 function* getBooks(signal: AbortSignal) {
   try {
-    const { data }: AxiosResponse<BookType[]> = yield call(api.get, ApiURL.books, { signal });
+    /* const { data }: AxiosResponse<BookType[]> = yield call(api.get, ApiURL.books, { signal }); */
+
+    const data = booksArray.books;
 
     yield put(getBooksSuccess(data));
   } catch {

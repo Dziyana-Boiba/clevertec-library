@@ -50,9 +50,18 @@ export const registerSlice = createSlice({
       state.loading = false;
       state.status = STATUS.ERROR;
     },
+    clearRegistrationData: (state) => {
+      state.error = false;
+      state.status = null;
+    },
   },
 });
 
-export const { registrationRequest, registrationSuccess, registrationDataFailed, registrationFailed } =
-  registerSlice.actions;
+export const {
+  registrationRequest,
+  registrationSuccess,
+  registrationDataFailed,
+  registrationFailed,
+  clearRegistrationData,
+} = registerSlice.actions;
 export const registerReducer = registerSlice.reducer;

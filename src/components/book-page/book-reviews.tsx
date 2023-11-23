@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import CatIcon from '../../assets/images/Icon_Cat.svg';
 import { ReactComponent as IconChevronDown } from '../../assets/images/Icon_Chevron_Down.svg';
@@ -14,6 +15,7 @@ type Props = {
 };
 
 export const BookReviews = ({ bookDetails }: Props) => {
+  const { t } = useTranslation();
   const [isReviewOpen, setIsReviewOpen] = useState(true);
   const openReviewsHandler = () => {
     setIsReviewOpen((prevState) => !prevState);
@@ -22,7 +24,8 @@ export const BookReviews = ({ bookDetails }: Props) => {
   return (
     <div className='reviews-container'>
       <p className={isReviewOpen ? 'book-page_block-title' : 'book-page_block-title closed'}>
-        Отзывы<span>{bookDetails?.comments ? bookDetails?.comments.length : 0}</span>
+        {t('main.REVIEWS')}
+        <span>{bookDetails?.comments ? bookDetails?.comments.length : 0}</span>
         {bookDetails?.comments && (
           <IconChevronDown
             className={isReviewOpen ? 'review-toggle-icon open' : 'review-toggle-icon'}
@@ -52,7 +55,7 @@ export const BookReviews = ({ bookDetails }: Props) => {
           ))}
       </div>
 
-      <Button data-test-id='button-rating'>оценить книгу</Button>
+      <Button data-test-id='button-rating'>{t('main.RATE_BOOK')}</Button>
     </div>
   );
 };

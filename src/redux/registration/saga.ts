@@ -10,9 +10,9 @@ import { registrationDataFailed, registrationFailed, registrationRequest, regist
 
 function* registrationWorker({ payload }: PayloadAction<RegistrationType>) {
   try {
-    const { data } = yield call(api.post, ApiURL.registration, payload);
+    /* const { data } = yield call(api.post, ApiURL.registration, payload);
 
-    console.log('registration success', data);
+    console.log('registration success', data); */
     yield put(registrationSuccess());
   } catch (error) {
     console.log('registration failed', error);

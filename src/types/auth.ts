@@ -1,3 +1,16 @@
+type InputType = {
+  inputName: string;
+  type: string;
+  label: string;
+  assistiveText: string;
+};
+
+export type StepsType = {
+  firstInput: InputType;
+  secondInput: InputType;
+  buttonText: string;
+};
+
 export type RegistrationType = {
   username: string;
   password: string;
@@ -28,7 +41,7 @@ export type ResetPassType = PasswordType & { code: string };
 
 export type PassInputsType = PasswordType & ForgotPassType;
 
-export type UserType = {
+/* export type UserType = {
   id: number;
   username: string;
   email: string;
@@ -40,4 +53,24 @@ export type UserType = {
   firstName: string;
   lastName: string;
   phone: string;
+}; */
+
+export type UserType = {
+  id: string;
+};
+
+export type RespondFieldType = {
+  header: string;
+  text: string;
+  button: string;
+};
+
+export type AuthRespondType = {
+  loginError: RespondFieldType;
+  registrationExist: RespondFieldType;
+  registrationError: RespondFieldType;
+  registrationSuccess: RespondFieldType;
+  forgotPassEmailSent: RespondFieldType;
+  forgotPassError: RespondFieldType;
+  forgotPassSuccess: RespondFieldType;
 };

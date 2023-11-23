@@ -3,6 +3,7 @@ import { PayloadAction } from '@reduxjs/toolkit';
 import { AxiosResponse } from 'axios';
 
 import { api } from '../../api/api';
+import { bookExact } from '../../assets/library-data/book-exact';
 import { ApiURL } from '../../constants/api-url';
 import { BookDetailsType } from '../../types/books';
 
@@ -10,9 +11,12 @@ import { getBookDetailsFailed, getBookDetailsRequest, getBookDetailsSuccess } fr
 
 function* getBookDetails({ payload }: PayloadAction<number>) {
   try {
-    const { data }: AxiosResponse<BookDetailsType> = yield call(api.get, `${ApiURL.books}/${payload}`);
+    /* const { data }: AxiosResponse<BookDetailsType> = yield call(api.get, `${ApiURL.books}/${payload}`); */
+    const data = bookExact.find((book) => book.id === Number(payload));
 
-    yield put(getBookDetailsSuccess(data));
+    console.log(payload, typeof payload, data);
+
+    yield put(getBookDetailsSuccess(data ? data : null));
   } catch {
     yield put(getBookDetailsFailed());
   }

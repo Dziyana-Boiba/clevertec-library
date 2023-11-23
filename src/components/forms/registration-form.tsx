@@ -1,7 +1,9 @@
 import { useForm } from 'react-hook-form';
 import { SubmitHandler } from 'react-hook-form/dist/types';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 
+import { registrationSteps } from '../../constants/auth';
 import { registrationRequest } from '../../redux/registration/slice';
 import { RegistrationType } from '../../types/auth';
 import { validateInput } from '../../utils/validation';
@@ -9,63 +11,13 @@ import { AuthInput } from '../common/auth-input/auth-input';
 
 import './form.scss';
 
-type Input = {
-  inputName: string;
-  type: string;
-  label: string;
-  assistiveText: string;
-};
-
-type Steps = {
-  firstInput: Input;
-  secondInput: Input;
-  buttonText: string;
-};
-
-const registrationSteps: Steps[] = [
-  {
-    firstInput: {
-      inputName: 'username',
-      type: 'text',
-      label: 'Придумайте логин для входа',
-      assistiveText: 'Используйте для логина латинский алфавит и цифры',
-    },
-    secondInput: {
-      inputName: 'password',
-      type: 'password',
-      label: 'Пароль',
-      assistiveText: 'Пароль не менее 8 символов, с заглавной буквой и цифрой',
-    },
-    buttonText: 'следующий шаг',
-  },
-  {
-    firstInput: {
-      inputName: 'firstName',
-      type: 'text',
-      label: 'Имя',
-      assistiveText: '',
-    },
-    secondInput: { inputName: 'lastName', type: 'text', label: 'Фамилия', assistiveText: '' },
-    buttonText: 'последний шаг',
-  },
-  {
-    firstInput: {
-      inputName: 'phone',
-      type: 'text',
-      label: 'Номер телефона',
-      assistiveText: 'В формате +375 (xx) xxx-xx-xx',
-    },
-    secondInput: { inputName: 'email', type: 'text', label: 'E-mail', assistiveText: '' },
-    buttonText: 'зарегистрироваться',
-  },
-];
-
 type Props = {
   registrationStep: number;
   setRegistrationStep: (value: number) => void;
 };
 
 export const RegistrationForm = ({ registrationStep, setRegistrationStep }: Props) => {
+  const { t } = useTranslation();
   const { register, handleSubmit, watch } = useForm<RegistrationType>();
 
   const dispatch = useDispatch();
@@ -100,8 +52,8 @@ export const RegistrationForm = ({ registrationStep, setRegistrationStep }: Prop
         showPassToggle={firstInput.type === 'password' ? true : false}
         showTick={firstInput.type === 'password' ? true : false}
         inputName={firstInput.inputName}
-        label={firstInput.label}
-        assistiveText={firstInput.assistiveText}
+        label={t(firstInput.label)}
+        assistiveText={t(firstInput.assistiveText)}
         type={firstInput.type}
       />
       <AuthInput
@@ -113,8 +65,8 @@ export const RegistrationForm = ({ registrationStep, setRegistrationStep }: Prop
         showPassToggle={secondInput.type === 'password' ? true : false}
         showTick={secondInput.type === 'password' ? true : false}
         inputName={secondInput.inputName}
-        label={secondInput.label}
-        assistiveText={secondInput.assistiveText}
+        label={t(secondInput.label)}
+        assistiveText={t(secondInput.assistiveText)}
         type={secondInput.type}
       />
       <button
@@ -125,7 +77,7 @@ export const RegistrationForm = ({ registrationStep, setRegistrationStep }: Prop
         type='submit'
         className='submit-btn'
       >
-        {buttonText}
+        {t(buttonText)}
       </button>
     </form>
   );

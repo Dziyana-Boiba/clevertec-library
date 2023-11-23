@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { NavLink, useParams } from 'react-router-dom';
 
@@ -8,6 +9,7 @@ import { categoriesSelector } from '../../redux/categories/selector';
 import './breadcrumbs.scss';
 
 export const Breadcrumbs = () => {
+  const { t } = useTranslation();
   const { category } = useParams();
 
   const { data: categories } = useSelector(categoriesSelector);
@@ -16,13 +18,13 @@ export const Breadcrumbs = () => {
   let currentCategory = null;
 
   if (categories && category !== 'all') {
-    currentCategory = categories.find(({ path }) => path === category)?.name;
+    currentCategory = categories.find(({ path }) => path === category)?.nameLang;
   }
 
   return (
     <div className='book-page_breadcrumbs'>
       <div className='book-page_breadcrumbs_link'>
-        <NavLink to={`/books/${category}`}>{currentCategory ? currentCategory : 'Все книги'}</NavLink>{' '}
+        <NavLink to={`/books/${category}`}>{currentCategory ? t(currentCategory) : t('categories.ALL_BOOKS')}</NavLink>{' '}
         <SlashIcon className='slash' /> <span>{bookDetails?.title}</span>
       </div>
     </div>

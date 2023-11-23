@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 
@@ -14,6 +15,7 @@ import { countBooks } from '../../utils/count-books';
 import './menu.scss';
 
 export const Menu = () => {
+  const { t } = useTranslation();
   const { pathname } = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -65,7 +67,7 @@ export const Menu = () => {
               onClick={(e) => openMenuHandler(e)}
               className={({ isActive }) => (isActive ? 'main-menu_link active' : 'main-menu_link')}
             >
-              Витрина книг
+              {t('main.BOOK_SHELF')}
               {!categoriesError && !booksError && (
                 <IconChevronDown className={isMenuOpen ? 'main-menu_link_svg open' : 'main-menu_link_svg'} />
               )}
@@ -78,7 +80,7 @@ export const Menu = () => {
                     onClick={closeSidebarHandler}
                     className={({ isActive }) => (isActive ? 'active' : '')}
                   >
-                    Все книги
+                    {t('categories.ALL_BOOKS')}
                   </NavLink>
                 </li>
                 {categoriesData &&
@@ -89,7 +91,7 @@ export const Menu = () => {
                         onClick={closeSidebarHandler}
                         className={({ isActive }) => (isActive ? 'active' : '')}
                       >
-                        {category.name}
+                        {t(category.nameLang)}
                       </NavLink>
                       <span>{countBooks(category.name, booksData)}</span>
                     </li>
@@ -106,7 +108,7 @@ export const Menu = () => {
               }}
               className={({ isActive }) => (isActive ? 'main-menu_link active' : 'main-menu_link')}
             >
-              Правила пользования
+              {t('main.TERMS_OF_USE')}
             </NavLink>
           </li>
           <li>
@@ -118,7 +120,7 @@ export const Menu = () => {
               }}
               className={({ isActive }) => (isActive ? 'main-menu_link active' : 'main-menu_link')}
             >
-              Договор оферты
+              {t('main.TERMS_OF_OFFER')}
             </NavLink>
           </li>
         </ul>
@@ -132,7 +134,7 @@ export const Menu = () => {
               }}
               className={({ isActive }) => (isActive ? 'main-menu_link active' : 'main-menu_link')}
             >
-              Профиль
+              {t('main.PROFILE')}
             </NavLink>
           </li>
           <li>
@@ -145,7 +147,7 @@ export const Menu = () => {
               }}
               className={({ isActive }) => (isActive ? 'main-menu_link active' : 'main-menu_link')}
             >
-              Выход
+              {t('main.LOGOUT')}
             </NavLink>
           </li>
         </ul>

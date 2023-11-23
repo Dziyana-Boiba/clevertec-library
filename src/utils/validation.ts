@@ -44,11 +44,11 @@ const phoneNumberValidation = (value: string) => {
   }
   const phoneCode = value.slice(6, 8);
 
-  if (phoneCode === '29' || phoneCode === '33' || phoneCode === '25' || phoneCode === '44') {
+  /*  if (phoneCode === '29' || phoneCode === '33' || phoneCode === '25' || phoneCode === '44') {
     return { valid: true, messageType: '' };
-  }
+  } */
 
-  return { valid: false, messageType: 'notValid' };
+  return { valid: true, messageType: '' };
 };
 
 const emailValidation = (value: string) => {

@@ -15,9 +15,10 @@ import 'swiper/css/pagination';
 
 type Props = {
   images: ImageType[] | null;
+  id: number;
 };
 
-export const BookSwiper = ({ images }: Props) => {
+export const BookSwiper = ({ images, id }: Props) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<null | any>(null);
 
   return (
@@ -42,14 +43,20 @@ export const BookSwiper = ({ images }: Props) => {
           >
             {images.map(({ url }: ImageType) => (
               <SwiperSlide key={'top'.concat(url ? url : '')}>
-                <img src={url ? url : ''} alt='The page of the book' />
+                <img
+                  src={url ? require(`../../assets/library-data/covers/${id}.webp`) : ''}
+                  alt='The page of the book'
+                />
               </SwiperSlide>
             ))}
           </Swiper>
           <Swiper pagination={true} modules={[Pagination]} className='swiper-mobile'>
             {images.map(({ url }: ImageType) => (
-              <SwiperSlide key={'mobile'.concat(url ? url : '')}>
-                <img src={url ? url : ''} alt='The page of the book' />
+              <SwiperSlide key={'mobile'.concat(url ? url : id.toString())}>
+                <img
+                  src={url ? require(`../../assets/library-data/covers/${id}.webp`) : ''}
+                  alt='The page of the book'
+                />
               </SwiperSlide>
             ))}
           </Swiper>
@@ -72,7 +79,10 @@ export const BookSwiper = ({ images }: Props) => {
             {images.length > 0 &&
               images.map(({ url }: ImageType) => (
                 <SwiperSlide key={'bottom'.concat(url ? url : '')}>
-                  <img src={url ? url : ''} alt='The page of the book' />
+                  <img
+                    src={url ? require(`../../assets/library-data/covers/${id}.webp`) : ''}
+                    alt='The page of the book'
+                  />
                 </SwiperSlide>
               ))}
           </Swiper>

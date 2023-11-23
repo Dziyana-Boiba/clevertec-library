@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { ReactComponent as CloseIcon } from '../../../assets/images/Icon_Close.svg';
@@ -17,6 +18,7 @@ type Props = {
 };
 
 export const SelectBar = ({ selectView, isListView }: Props) => {
+  const { t } = useTranslation();
   const [isInputOpen, setIsInputOpen] = useState(false);
   const dispatch = useDispatch();
 
@@ -48,13 +50,13 @@ export const SelectBar = ({ selectView, isListView }: Props) => {
             type='text'
             data-test-id='input-search'
             onChange={(e) => setSearchHandler(e)}
-            placeholder='Поиск книги или автора…'
+            placeholder={t('main.SEARCH_BOOK_OR_AUTHOR')}
           />
           <CloseIcon className='close-icon' onClick={closeInputHandler} data-test-id='button-search-close' />
         </div>
         <button type='button' onClick={setFilterHandler} className='rating-btn' data-test-id='sort-rating-button'>
           <RatingIcon className={ratingDown ? '' : 'rating-up'} />
-          <span>По рейтингу</span>
+          <span>{t('main.BY_RATING')}</span>
         </button>
       </div>
 

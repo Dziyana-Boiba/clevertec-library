@@ -45,7 +45,11 @@ export const BookCard = ({ book, isListView, onClick }: Props) => {
     >
       <div className='card-container_book-image'>
         {book.image && book.image.url ? (
-          <img loading='lazy' src={book.image.url} alt='Title page of the book' />
+          <img
+            loading='lazy'
+            src={require(`../../assets/library-data/covers/${book.id}.webp`)}
+            alt='Title page of the book'
+          />
         ) : (
           <CatIcon />
         )}

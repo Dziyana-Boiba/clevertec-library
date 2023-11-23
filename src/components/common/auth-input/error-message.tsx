@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   error: string;
@@ -6,34 +7,39 @@ type Props = {
 };
 
 export const ErrorMessage = ({ error, inputType }: Props) => {
+  const { t } = useTranslation();
+
   const loginErrorMessage = (
     <span className={`assistive-text ${error === 'all' ? 'error' : ''}`}>
-      Используйте для логина <span className={error === 'latin' ? 'error' : ''}>латинский алфавит</span> и{' '}
-      <span className={error === 'number' ? 'error' : ''}>цифры</span>
+      {t('auth.USERNAME_RULES.part1')}{' '}
+      <span className={error === 'latin' ? 'error' : ''}>{t('auth.USERNAME_RULES.part2')}</span>{' '}
+      {t('auth.USERNAME_RULES.part3')}{' '}
+      <span className={error === 'number' ? 'error' : ''}>{t('auth.USERNAME_RULES.part4')}</span>
     </span>
   );
 
   const passwordErrorMessage = (
     <span className={`assistive-text ${error === 'all' ? 'error' : ''}`}>
-      Пароль
-      <span className={error.includes('length') ? 'error' : ''}> не менее 8 символов</span>,
-      <span className={error.includes('capital') ? 'error' : ''}> с заглавной буквой</span> и
-      <span className={error.includes('number') ? 'error' : ''}> цифрой</span>
+      {t('auth.PASSWORD_RULES.part1')}
+      <span className={error.includes('length') ? 'error' : ''}> {t('auth.PASSWORD_RULES.part2')}</span>,
+      <span className={error.includes('capital') ? 'error' : ''}> {t('auth.PASSWORD_RULES.part3')}</span>{' '}
+      {t('auth.PASSWORD_RULES.part4')}
+      <span className={error.includes('number') ? 'error' : ''}> {t('auth.PASSWORD_RULES.part5')}</span>
     </span>
   );
 
   const phoneNumberErrorMessage = (
-    <span className={`assistive-text ${error === 'notValid' ? 'error' : ''}`}>В формате +375 (xx) xxx-xx-xx</span>
+    <span className={`assistive-text ${error === 'notValid' ? 'error' : ''}`}>{t('auth.PHONE_NUMBER_FORMAT')}</span>
   );
 
   const emailErrorMessage = (
-    <span className={`assistive-text ${error === 'email' ? 'error' : ''}`}>Введите корректный e-mail</span>
+    <span className={`assistive-text ${error === 'email' ? 'error' : ''}`}>{t('auth.ENTER_VALID_EMAIL')}</span>
   );
 
-  const repeatPasswordErrorMessage = <span className='assistive-text error'>Пароли не совпадают</span>;
+  const repeatPasswordErrorMessage = <span className='assistive-text error'>{t('auth.PASSWORDS_DO_NOT_MATCH')}</span>;
 
   return error === 'required' ? (
-    <span className='assistive-text error'>Поле не может быть пустым</span>
+    <span className='assistive-text error'>{t('auth.FIELD_CANNOT_BE_EMPTY')}</span>
   ) : (
     <React.Fragment>
       {inputType === 'username' && loginErrorMessage}

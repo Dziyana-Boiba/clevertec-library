@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -16,6 +17,7 @@ type Props = {
 };
 
 export const BooksList = ({ isListView }: Props) => {
+  const { t } = useTranslation();
   const { category } = useParams<{ category?: string }>();
   const navigate = useNavigate();
   const { search, ratingDown } = useSelector(appStateSelector);
@@ -56,11 +58,11 @@ export const BooksList = ({ isListView }: Props) => {
   if (currentBooksList && currentBooksList.length === 0) {
     return search ? (
       <div className='no-books' data-test-id='search-result-not-found'>
-        По запросу ничего не найдено
+        {t('main.NOTHING_FOUND')}
       </div>
     ) : (
       <div className='no-books' data-test-id='empty-category'>
-        В этой категории книг ещё нет
+        {t('main.NO_BOOKS_IN_CATEGORY')}
       </div>
     );
   }

@@ -67,48 +67,53 @@
         font-size: 32px;
         line-height: 40px;
       }
-      .header_user {
+      &_right {
         display: flex;
+        gap: 20px;
         align-items: center;
-        justify-content: flex-end;
-        position: relative;
-        span {
-          font-weight: 600;
-          font-size: 14px;
-          margin-right: 16px;
-        }
-        .header_user-avatar {
-          width: 58px;
-          height: 58px;
-        }
-        .header-user-menu {
-          display: none;
-          flex-direction: column;
+        .header_user {
+          display: flex;
+          align-items: center;
           justify-content: flex-end;
-          width: 200px;
-          position: absolute;
-          top: 60px;
-          right: 0;
-          background: #ffffff;
-          box-shadow: 0px 2px 4px rgba(191, 196, 201, 0.2), 0px 3px 4px rgba(191, 196, 201, 0.18),
-            0px 1px 5px rgba(191, 196, 201, 0.24);
-          border-radius: 10px;
-          padding: 8px;
-          z-index: 1000;
-          button {
-            border: none;
-            background: none;
-            padding: 10px;
-            text-align: end;
-            font-weight: 700;
-            font-size: 18px;
-            line-height: 28px;
-            cursor: pointer;
+          position: relative;
+          span {
+            font-weight: 600;
+            font-size: 14px;
+            margin-right: 16px;
           }
-        }
-        &:hover {
+          .header_user-avatar {
+            width: 58px;
+            height: 58px;
+          }
           .header-user-menu {
-            display: flex;
+            display: none;
+            flex-direction: column;
+            justify-content: flex-end;
+            width: 200px;
+            position: absolute;
+            top: 60px;
+            right: 0;
+            background: #ffffff;
+            box-shadow: 0px 2px 4px rgba(191, 196, 201, 0.2), 0px 3px 4px rgba(191, 196, 201, 0.18),
+              0px 1px 5px rgba(191, 196, 201, 0.24);
+            border-radius: 10px;
+            padding: 8px;
+            z-index: 1000;
+            button {
+              border: none;
+              background: none;
+              padding: 10px;
+              text-align: end;
+              font-weight: 700;
+              font-size: 18px;
+              line-height: 28px;
+              cursor: pointer;
+            }
+          }
+          &:hover {
+            .header-user-menu {
+              display: flex;
+            }
           }
         }
       }
@@ -193,7 +198,7 @@
       height: 40px;
 
       .header_aside {
-        justify-content: flex-start;
+        //justify-content: flex-start;
         .header_user {
           display: none;
         }

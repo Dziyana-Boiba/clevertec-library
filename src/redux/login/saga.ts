@@ -9,12 +9,19 @@ import { LoginResponse, LoginType } from '../../types/auth';
 
 import { loginDataFailed, loginFailed, loginRequest, loginSuccess } from './slice';
 
+function generateToken() {
+  const random = Math.random();
+
+  return (random === 0 ? random + 0.1 : random).toString(36).substring(2);
+}
+
 function* loginRequestWorker({ payload }: PayloadAction<LoginType>) {
   yield localStorage.clear();
   try {
-    const { data }: AxiosResponse<LoginResponse> = yield call(api.post, ApiURL.login, {
+    /*     const { data }: AxiosResponse<LoginResponse> = yield call(api.post, ApiURL.login, {
       ...payload,
-    });
+    }); */
+    const data = { jwt: generateToken(), user: { id: generateToken() } };
     const { jwt, user } = data;
 
     yield localStorage.setItem(TOKEN_JWT_LS, JSON.stringify(jwt));
